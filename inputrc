@@ -1,0 +1,14 @@
+#More sane command matching
+set match-hidden-files off
+set page-completions off
+set completion-query-items 350
+set show-all-if-ambiguous on
+
+#Page up and page down history search
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
+
+#Home and end keybindings
+"\e[4~": end-of-line
+"\e[1~": beginning-of-line
+
