@@ -1,12 +1,5 @@
-if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
-  . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
-  . $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
-fi
-
 # source ~/.bash_completion
 source ~/.ssh_completion
-complete -C ~/.rake_completion -o default rake
-complete -C ~/.capistrano_completion -o default capistrano
 
 eval "$(rbenv init -)"
 
@@ -69,10 +62,15 @@ case ${ruby_version%-*} in
   *)     ruby_version_string="system" ;;
 esac
 
-# Fancy coloured Bash prompt
-PS1="\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+# Fancy coloured bash prompt
+export PS1="\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
 
-## Show the git branch in your Bash prompt
-# PS1="$GREEN\$(date +%H:%M) \w$YELLOW $ruby_version_string \$(__git_ps1 "[%s]")$WHITE\$ "
+# This prints the local host in the screen title. Used in conjunction with ssh_screen.sh
+export PROMPT_COMMAND='history -a; if [ $TERM = "screen" ]; then printf "\033k${HOSTNAME%%.*}\033\\" ; fi' 
+export GREP_OPTIONS="--exclude=\*.svn\*"
+echo -ne "\033]0;$HOSTNAME\007"
 
-# vim: set ft=sh:
+# Allows you to send ctrl-s & ctrl-q to terminal applications
+stty stop undef # unmap ctrl-s
+stty start undef # unmap ctrl-q
+
