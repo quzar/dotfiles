@@ -45,12 +45,13 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm brew jira docker)
+plugins=(brew git npm gulp docker)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/usr/local/jmeter/bin:/usr/local/mule/bin:/Users/dthompson1/dev/go/appengine:/Users/dthompson1/Applications"
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin:/usr/local/jmeter/bin:/Users/dthompson1/dev/go/appengine:/Users/dthompson1/Library/Android/sdk/build-tools/22.0.1:/Users/dthompson1/Library/Android/sdk/platform-tools:/Users/dthompson1/Applications"
+export GOPATH="/Users/dthompson1/dev/go"
+export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 

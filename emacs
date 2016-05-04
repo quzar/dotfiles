@@ -1,3 +1,11 @@
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this line
+
 ;; Set the command (Apple) key as Meta
 (setq mac-command-modifier 'meta)
 (setq x-select-enable-clipboard t)
@@ -52,18 +60,15 @@
 (defun do-on-write-file()
   (untabify-buffer))
 
-;; SLIME
-(add-to-list 'load-path "c:/Lisp/slime")
-(require 'slime)
-
 ;; Add the hooks.
 (add-hook 'write-file-hooks 'do-on-write-file)
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 
-(unless (featurep 'aquamacs)
-  (setq inferior-lisp-program "c:/Lisp/SBCL/sbcl"))
-
 ;; Fix backspace for remote sessions
 (global-set-key "\C-h" 'backward-delete-char)
+
+;; Set your lisp system and, optionally, some contribs
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(setq slime-contribs '(slime-fancy))
 
