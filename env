@@ -1,39 +1,47 @@
-export PATH=""
-# http://www.oracle.com/technetwork/java/javase/downloads/jdk-7u4-downloads-1591156.html
-export PATH="$PATH:/Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home/bin"
-export PATH="$PATH:/usr/local/share/python"
-export PATH="$PATH:/opt/local/bin"
-export PATH="$PATH:/opt/local/sbin"
-export PATH="$PATH:/usr/local/bin"
-export PATH="$PATH:/usr/local/sbin"
+export PATH="."
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:/usr/local/lib"
+export PATH="$PATH:/usr/local/sbin"
+export PATH="$PATH:/opt/local/bin"
+export PATH="$PATH:/opt/local/lib"
+export PATH="$PATH:/opt/local/sbin"
 export PATH="$PATH:/usr/bin"
-export PATH="$PATH:/bin"
 export PATH="$PATH:/usr/sbin"
+export PATH="$PATH:/bin"
 export PATH="$PATH:/sbin"
-export PATH="$PATH:/usr/X11/bin"
-export PATH="$PATH:/usr/local/share/npm/bin"
-export PATH="$PATH:/usr/local/share/python"
-export PATH="$PATH:/usr/local/go/bin"
-export PATH="$PATH:$HOME/google_appengine"
 
-export NODE_PATH="/usr/local/lib/node:/usr/local/lib/node_modules"
+export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages"
 
 export MANPATH="/usr/local/man:/usr/local/mysql/man:$MANPATH"
 
-export EDITOR="subl" # "vim"
+export EDITOR="mvim"
 
-export GIT_EDITOR="subl -w"
+export GIT_EDITOR="$EDITOR -f" # don't background
 
 export AUTOFEATURE=true
 
-export CC=/usr/bin/clang
+export CDPATH=.:~:~/workspace:~/gocode/src/github.com/geetarista
 
-export rvm_path=$HOME/workspace/rvm
+# Go-specific
+export GOPATH="$HOME/gocode"
+export PATH="$PATH:${GOPATH}/bin"
 
-export CDPATH=.:~:workspace
+# Colors for `man`
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;34m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
 
-export GOPATH=`which go`
+# Keep less output after quit
+export LESS="-X -R"
+
+export GIT_PS1_SHOWDIRTYSTATE=1
+
+export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 
 # vim: set ft=sh:

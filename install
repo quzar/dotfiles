@@ -1,10 +1,12 @@
 #!/bin/sh
 
+set -e
+
 # This installation is destructive, as it removes exisitng files/directories.
 # Use at your own risk.
 
 for name in *; do
-  if [ ! $name == "README.md" -a ! $name == "LICENSE" -a ! $name == "install.sh" ]; then
+  if [ ! $name == "README.md" -a ! $name == "LICENSE" -a ! $name == "install" ]; then
     target="$HOME/.$name"
 
     if [ -h $target ]; then
@@ -17,3 +19,5 @@ for name in *; do
     echo "Linked $PWD/$name to $target."
   fi
 done
+
+touch $HOME/.dotfiles_installed

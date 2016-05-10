@@ -1,5 +1,12 @@
+if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
+  . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
+  . $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+fi
+
 # source ~/.bash_completion
 source ~/.ssh_completion
+complete -C ~/.rake_completion -o default rake
+complete -C ~/.capistrano_completion -o default capistrano
 
 eval "$(rbenv init -)"
 
@@ -74,3 +81,4 @@ echo -ne "\033]0;$HOSTNAME\007"
 stty stop undef # unmap ctrl-s
 stty start undef # unmap ctrl-q
 
+# vim: set ft=sh:

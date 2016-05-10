@@ -1,0 +1,18 @@
+[alias]
+clean = !hg status -un0 | xargs -r0 rm
+
+[email]
+from = rcolvin <rcolvin@couponsinc.com>
+
+[extensions]
+color =
+prompt = $HOME/workspace/hg-prompt/prompt.py
+shelve =
+
+[trusted]
+users = build
+groups = releng, engineeringteam
+
+[ui]
+ignore = ~/.hgignore
+username = rcolvin <rcolvin@couponsinc.com>

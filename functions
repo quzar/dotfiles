@@ -2,6 +2,10 @@ function cdw() {
   cd ~/workspace/$1;
 }
 
+function cdg() {
+  cd $GOPATH/src/github.com/$1;
+}
+
 function daylog() {
   git log --format="%s " --since="18 hours ago" --author="Robby Colvin" --no-merges --reverse | xargs -0 ruby -e "puts ARGV.to_s.split(/ \n/).join(' ')"
 }
@@ -80,11 +84,8 @@ rmdsstore() {
   fi
 }
 
-function dnsflush() {
-  dscacheutil -flushcache
-}
-
 extract () {
+  echo Extracting $1 ...
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2) tar xjf $1 ;;
@@ -97,11 +98,66 @@ extract () {
       *.tgz) tar xzf $1 ;;
       *.zip) unzip $1 ;;
       *.Z) uncompress $1 ;;
+      *.7z) 7z x $1 ;;
       *) echo "'$1' cannot be extracted via extract()" ;;
     esac
   else
     echo "'$1' is not a valid file"
   fi
 }
+
+function prezhi() {
+  highlight -O rtf -t 2 -K 40 -k 'Source Code Pro' --style molokai $1 | pbcopy
+}
+
+function updaterepos() {
+  for dir in $(find . -type d -d 1) ; do
+    if [ -d $dir/.git ]; then
+      echo $dir
+      git --git-dir=$dir/.git --work-tree=$PWD/$dir pull
+    fi
+  done
+}
+
+function resolvekiip {
+  HOST=`dig $1 | sed -n 's|.*A.*\(10\..*\)|\1|p'`
+  echo $HOST
+}
+
+function sshkiip {
+  HOST=`dig $1 | sed -n 's|.*A.*\(10\..*\)|\1|p'`
+  if [ "$HOST" = "" ]; then
+    echo "Host $1 not found."
+    return
+  fi
+  ssh -i $HOME/workspace/kiip/.chef/kiip-ssh.pem -l ubuntu $HOST ${@:2}
+}
+
+function package_vmware() {
+  ID=$(ls .vagrant/machines/default/vmware_fusion | grep -v id | grep -v lock | grep -v action_provision)
+  DIR=".vagrant/machines/default/vmware_fusion/${ID}"
+  VDISK="$DIR/Virtual Disk.vmdk"
+  VDISKMANAGER="/Applications/VMware Fusion.app/Contents/Library/vmware-vdiskmanager"
+  "$VDISKMANAGER" -d "$VDISK"
+  "$VDISKMANAGER" -k "$VDISK"
+  pushd $DIR
+  if [ -f vmware.box ]; then rm vmware.box; fi
+  tar cvzf vmware.box *
+  popd
+  mv "${DIR}/vmware.box" .
+  echo "Packaged VM to ./vmware.box"
+}
+
+function curlsh {
+  file=$(mktemp -t curlsh) || { echo "Failed creating file"; return; }
+  curl -s "$1" > $file || { echo "Failed to curl file"; return; }
+  $EDITOR $file || { echo "Editor quit with error code"; return; }
+  sh $file;
+  rm $file;
+}
+
+# function echo {
+#   builtin echo -e '\E[36m'$(basename $0 .sh): '\E[33m'$1;
+# }
 
 # vim: set ft=sh:
