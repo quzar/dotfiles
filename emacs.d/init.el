@@ -1,3 +1,7 @@
+;; Set the command (Apple) key as Meta
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier nil)
+
 ;;;;
 ;; Packages
 ;;;;
@@ -10,10 +14,6 @@
              '("tromey" . "http://tromey.com/elpa/") t)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-;; (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-;;                          ("marmalade" . "http://marmalade-repo.org/packages/")
-;;                          ("melpa" . "http://melpa-stable.milkbox.net/packages/")))
 
 
 ;; Load and activate emacs packages. Do this first so that the
