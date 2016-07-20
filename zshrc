@@ -79,8 +79,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
-alias machine="docker-machine"
 alias sourcetree='open -a SourceTree'
+alias updatedb="sudo /usr/libexec/locate.updatedb"
 
 function mycolour () {
 #  echo -n "\\e[40;37m"
